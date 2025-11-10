@@ -16,6 +16,8 @@ self.addEventListener('activate',e=>{e.waitUntil((async()=>{const keys=await cac
 self.addEventListener('fetch',e=>{
   const {request}=e; if(request.method!=='GET') return;
   const url = new URL(request.url);
+  // Ignore non-http(s) schemes (e.g., chrome-extension://) and opaque requests
+  if(url.protocol!=='http:' && url.protocol!=='https:') return;
   // Stale-While-Revalidate for API stories
   if(url.pathname.startsWith('/v1/stories')){
     e.respondWith((async()=>{
