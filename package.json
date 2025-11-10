@@ -1,0 +1,25 @@
+{
+  "name": "dicoding-mapstories-vite",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview --port 3000",
+    "preview": "vite preview --port 5173",
+    "clean": "rmdir /s /q node_modules",
+    "rebuild": "npm run clean && npm install && npm run dev",
+    "fix-sw": "rimraf dist && vite build && vite preview --port 3000",
+    "icons:gen": "node scripts/gen-icons.mjs"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.10",
+    "sharp": "^0.34.5",
+    "vite": "^5.2.0"
+  }
+}

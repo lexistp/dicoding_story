@@ -1,0 +1,30 @@
+/* Custom View Transitions for route changes */
+#app{ view-transition-name: route; }
+
+::view-transition-old(route){
+  animation: vt-slide-out .35s ease both;
+}
+::view-transition-new(route){
+  animation: vt-slide-in .35s ease both;
+}
+
+@keyframes vt-slide-in{
+  from{ opacity:0; transform: translateY(8px); }
+  to{ opacity:1; transform: none; }
+}
+@keyframes vt-slide-out{
+  from{ opacity:1; transform: none; }
+  to{ opacity:0; transform: translateY(-6px); }
+}
+
+/* Fallback class for browsers w/o View Transitions */
+.vt-fade{ animation: vt-slide-in .35s ease; }
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce){
+  ::view-transition-old(route),
+  ::view-transition-new(route){
+    animation: none !important;
+  }
+  .vt-fade{ animation: none !important; }
+}

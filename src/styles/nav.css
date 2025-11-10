@@ -1,0 +1,22 @@
+/* Navbar polish overrides */
+.navbar{ box-shadow: 0 6px 18px rgba(12,20,48,.06); }
+.nav-inner{ gap: 1rem; }
+.brand{ font-size: 1.15rem; }
+
+.menu{ align-items:center; }
+.menu a{ padding:.55rem .85rem; border-radius:.6rem; }
+.menu a:hover{ background: rgba(124,156,255,.12); }
+.menu a[aria-current="page"]{ color: var(--accent); font-weight: 800; }
+
+/* Desktop */
+@media (min-width: 768px){
+  #menuToggle{ display:none; }
+  #menuList{ display:flex !important; }
+}
+
+/* Mobile collapsed */
+@media (max-width: 767px){
+  #menuList{ display:none; flex-direction:column; align-items:flex-start; }
+  #menuList[data-collapsed="false"]{ display:flex; }
+}
+

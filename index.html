@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dicoding Stories • Peta SPA</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/src/styles/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+  <div id="splash" class="splash active" aria-hidden="true">
+    <div class="splash-card">
+      <div class="splash-logo">◆</div><div class="splash-title">Dicoding Stories</div><div class="spinner" aria-label="Memuat"></div>
+    </div>
+  </div>
+  <header class="navbar" role="banner">
+    <div class="nav-inner">
+      <h1 class="brand" aria-label="Dicoding Stories"><a href="#/home" data-link style="display:flex;gap:.6rem;align-items:center;text-decoration:none;color:inherit"><span class="logo" aria-hidden="true">◆</span><span class="brand-text">Dicoding Stories</span></a></h1>
+      <div class="nav-actions"><button id="themeToggle" class="icon-btn" aria-label="Ganti tema">🌞</button><button id="pushToggle" class="icon-btn" aria-label="Notifikasi" aria-pressed="false">🔕</button><button id="menuToggle" class="menu-btn" aria-expanded="false" aria-controls="menuList">Menu</button></div>
+      <nav aria-label="Navigasi utama"><ul id="menuList" class="menu" data-collapsed="true">
+        <li><a href="#/home" data-link>Home</a></li><li><a href="#/favorites" data-link>Favorit <span id="fav-count" class="badge" style="display:none"></span></a></li><li><a href="#/add" data-link id="nav-add">Tambah Story</a></li><li><a href="#/login" data-link id="nav-login">Login</a></li><li><a href="#/register" data-link id="nav-register">Register</a></li>
+      <li><a id="nav-logout" href="#">Logout</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main" tabindex="-1" class="container" role="main"><div id="app" aria-live="polite"></div></main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body></html>

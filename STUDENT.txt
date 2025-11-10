@@ -1,0 +1,4 @@
+Deployment URL: <isi setelah deploy, contoh: https://your-site.netlify.app>
+Notes:
+- VAPID public key digunakan untuk push notification ada di src/api/index.js
+- Aplikasi berbasis Vite. Gunakan `npm run build` lalu deploy folder `dist`.

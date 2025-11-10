@@ -1,0 +1,21 @@
+/* Strong, consistent focus ring */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #7c9cff;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Visible focus for custom menu button etc. */
+.menu-btn:focus-visible,
+.icon-btn:focus-visible {
+  outline: 3px solid #7c9cff;
+  outline-offset: 2px;
+}
+
+/* Ensure skip link remains highly visible when focused (extra safety) */
+.skip-link:focus { box-shadow: 0 0 0 3px #7c9cff; }
+
