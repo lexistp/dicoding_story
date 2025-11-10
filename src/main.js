@@ -90,6 +90,8 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   async function updateFavCount(){ try{ const n=(await favList()).length; const badge=document.getElementById('fav-count'); if(!badge) return; if(n>0){ badge.style.display='inline-block'; badge.textContent=String(n); } else { badge.style.display='none'; badge.textContent=''; } }catch{} }
   document.addEventListener('favoritesUpdated', updateFavCount);
   updateFavCount();
+  // Pastikan badge tetap sinkron saat berpindah halaman
+  window.addEventListener('hashchange', updateFavCount);
   const btn=document.getElementById('menuToggle'); const menu=document.getElementById('menuList');
   if(btn&&menu){ btn.addEventListener('click',()=>{ const c=menu.dataset.collapsed==='true'; menu.dataset.collapsed=String(!c); btn.setAttribute('aria-expanded',String(!c)); }); }
   setTimeout(()=> splash.classList.remove('active'), 1200);

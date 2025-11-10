@@ -21,7 +21,7 @@ export class FavoritesView{
         <p>${s.description||''}</p><div><span class="badge">${new Date(s.createdAt).toLocaleDateString()}</span>
         <a class="badge" href="#/detail/${s.id}">Lihat Detail</a>
         <button class="secondary" data-remove>Hapus</button></div></div>`;
-      item.querySelector('[data-remove]').addEventListener('click', async()=>{ await favRemove(s.id); this.state.items=this.state.items.filter(x=>x.id!==s.id); this.applyFilter(); try{ document.dispatchEvent(new CustomEvent('favoritesUpdated')); }catch{} });
+      item.querySelector('[data-remove]').addEventListener('click', async()=>{ await favRemove(s.id); this.state.items=this.state.items.filter(x=>x.id!==s.id); this.applyFilter(); try{ document.dispatchEvent(new CustomEvent('favoritesUpdated')); }catch{} try{ (await import('../api/index.js')).toast('Dihapus dari Favorit', true); }catch{} });
       el.appendChild(item);
     }
   }
@@ -33,6 +33,11 @@ export class FavoritesView{
   async load(){
     const items=await favList(); this.state.items=items; this.applyFilter();
     this.s.querySelector('#q').addEventListener('input',()=>this.applyFilter());
-    this.s.querySelector('#clearAll').addEventListener('click', async()=>{ for(const it of [...this.state.items]) await favRemove(it.id); this.state.items=[]; this.applyFilter(); try{ document.dispatchEvent(new CustomEvent('favoritesUpdated')); }catch{} });
+    this.s.querySelector('#clearAll').addEventListener('click', async()=>{ for(const it of [...this.state.items]) await favRemove(it.id); this.state.items=[]; this.applyFilter(); try{ document.dispatchEvent(new CustomEvent('favoritesUpdated')); }catch{} try{ (await import('../api/index.js')).toast('Semua favorit dihapus', true); }catch{} });
+    // Dengarkan perubahan favorit dari halaman lain, lalu reload
+    if(!this._favEvt){
+      this._favEvt = ()=>{ try{ this.load(); }catch{} };
+      document.addEventListener('favoritesUpdated', this._favEvt);
+    }
   }
 }

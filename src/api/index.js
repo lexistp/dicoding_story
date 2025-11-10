@@ -108,7 +108,12 @@ export async function subscribePush(){
   const reg = await navigator.serviceWorker.ready;
   const sub = await reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC) });
   const body = sub.toJSON();
-  const r = await fetchWithTimeout(`${API_BASE}/notifications/subscribe`, { method:'POST', headers:{'Content-Type':'application/json', Authorization:`Bearer ${getToken()}`}, body: JSON.stringify({ endpoint:body.endpoint, p256dh:body.keys?.p256dh, auth:body.keys?.auth }) });
+  // Dicoding API expects nested keys object: { endpoint, keys: { p256dh, auth } }
+  const r = await fetchWithTimeout(`${API_BASE}/notifications/subscribe`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json', Authorization:`Bearer ${getToken()}`},
+    body: JSON.stringify({ endpoint: body.endpoint, keys: { p256dh: body.keys?.p256dh, auth: body.keys?.auth } })
+  });
   return r.json();
 }
 

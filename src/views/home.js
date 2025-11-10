@@ -42,7 +42,12 @@ export class HomeView{
         <button class="secondary" data-fav aria-pressed="${isFav?'true':'false'}">${isFav?'★ Favorit':'☆ Favorit'}</button>
         </div></div>`;
       item.querySelector('[data-fav]').addEventListener('click', async(e)=>{
-        e.stopPropagation(); const nowFav = await favToggle(s); const btn=e.currentTarget; btn.setAttribute('aria-pressed', nowFav?'true':'false'); btn.textContent = nowFav? '★ Favorit':'☆ Favorit';
+        e.stopPropagation();
+        const nowFav = await favToggle(s);
+        const btn=e.currentTarget;
+        btn.setAttribute('aria-pressed', nowFav?'true':'false');
+        btn.textContent = nowFav? '★ Favorit':'☆ Favorit';
+        try{ toast(nowFav? 'Ditambahkan ke Favorit' : 'Dihapus dari Favorit', true); }catch{}
         try{ document.dispatchEvent(new CustomEvent('favoritesUpdated')); }catch{}
       });
       listEl.appendChild(item);
